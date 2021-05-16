@@ -102,24 +102,24 @@ pause;
 %  How does the decision boundary change when you vary lambda? How does
 %  the training set accuracy vary?
 %
-
+for i = 1:4
 % Initialize fitting parameters
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1 (you should vary this)
-lambda = 1;
+lambda = [0, 1, 10, 100];
 
 % Set Options
 options = optimset('GradObj', 'on', 'MaxIter', 400);
 
 % Optimize
 [theta, J, exit_flag] = ...
-	fminunc(@(t)(costFunctionReg(t, X, y, lambda)), initial_theta, options);
+	fminunc(@(t)(costFunctionReg(t, X, y, lambda(i))), initial_theta, options);
 
 % Plot Boundary
 plotDecisionBoundary(theta, X, y);
 hold on;
-title(sprintf('lambda = %g', lambda))
+title(sprintf('lambda = %g', lambda(i)))
 
 % Labels and Legend
 xlabel('Microchip Test 1')
@@ -132,5 +132,6 @@ hold off;
 p = predict(theta, X);
 
 fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
+pause;
+endfor
 fprintf('Expected accuracy (with lambda = 1): 83.1 (approx)\n');
-
