@@ -23,11 +23,28 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+list = [];
+
+for i = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30]
+  for j = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30]
+    predictions = svmPredict(svmTrain(X, y, i, @(x1, x2) gaussianKernel(x1, x2, j)), Xval);
+    error = mean(double(predictions ~= yval));
+    list = [list; i j error];
+  endfor
+endfor
+
+[minval, row] = min(min(list(:, 3), [], 2));
+
+C = list(row, 1);
+sigma = list(row, 2);
+>>>>>>> 2af3982479d3c83d9ffde3d3ca33eb99e23ddaa3
 
 % =========================================================================
 

@@ -48,12 +48,18 @@ x = zeros(n, 1);
 %
 %
 
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+  for i = 1:length(word_indices)
+    x(word_indices(i)) = 1;
+  endfor
+>>>>>>> 2af3982479d3c83d9ffde3d3ca33eb99e23ddaa3
 
 % =========================================================================
     
