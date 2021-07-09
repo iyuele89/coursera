@@ -21,11 +21,13 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+idxs = zeros(size(X,1), K);
 
+for i = 1:K
+  idxs(:, i) = sum(abs(X - centroids(i, :)) .^ 2, 2);
+endfor
 
-
-
-
+[minval, idx] = min(idxs, [], 2);
 
 % =============================================================
 
